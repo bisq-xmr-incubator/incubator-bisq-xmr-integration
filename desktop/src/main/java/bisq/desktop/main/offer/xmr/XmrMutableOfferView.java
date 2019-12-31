@@ -599,7 +599,7 @@ public abstract class XmrMutableOfferView<M extends XmrMutableOfferViewModel> ex
         xmrAddressTextField.amountAsCoinProperty().bind(model.getDataModel().getMissingCoin());
         buyerSecurityDepositInputTextField.textProperty().bindBidirectional(model.buyerSecurityDeposit);
         buyerSecurityDepositLabel.textProperty().bind(model.buyerSecurityDepositLabel);
-        tradeFeeInXmrLabel.textProperty().bind(model.tradeFeeInXmrWithFiat);
+        tradeFeeInXmrLabel.textProperty().bind(model.tradeFeeInXmrWithBsq);
         tradeFeeInBsqLabel.textProperty().bind(model.tradeFeeInBsqWithFiat);
         tradeFeeDescriptionLabel.textProperty().bind(model.tradeFeeDescription);
         tradeFeeInXmrLabel.visibleProperty().bind(model.isTradeFeeVisible);

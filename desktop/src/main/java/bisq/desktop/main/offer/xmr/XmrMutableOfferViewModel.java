@@ -127,7 +127,7 @@ public abstract class XmrMutableOfferViewModel<M extends XmrMutableOfferDataMode
     // If we would change the price representation in the domain we would not be backward compatible
     public final StringProperty price = new SimpleStringProperty();
     final StringProperty tradeFee = new SimpleStringProperty();
-    final StringProperty tradeFeeInXmrWithFiat = new SimpleStringProperty();
+    final StringProperty tradeFeeInXmrWithBsq = new SimpleStringProperty();
     final StringProperty tradeFeeInBsqWithFiat = new SimpleStringProperty();
     final StringProperty tradeFeeCurrencyCode = new SimpleStringProperty();
     final StringProperty tradeFeeDescription = new SimpleStringProperty();
@@ -512,14 +512,8 @@ public abstract class XmrMutableOfferViewModel<M extends XmrMutableOfferDataMode
             XmrCoin makerFeeInXmr = dataModel.getMakerFee();
             Optional<Volume> optionalFeeInFiat = OfferUtil.getFeeInUserFiatCurrency(makerFeeInBsq,
                     false, preferences, priceFeedService, bsqFormatter);
-            String xmrFeeWithFiatAmount = DisplayUtils.getFeeWithFiatAmount(makerFeeInBsq, optionalFeeInFiat, bsqFormatter);
-            if (DevEnv.isDaoActivated()) {
-                tradeFeeInXmrWithFiat.set(xmrFeeWithFiatAmount);
-            } else {
-                tradeFeeInXmrWithFiat.set(xmrFormatter.formatCoinWithCode(makerFeeInXmr));
-            }
-
-          //TODO(niyid) XmrOfferUtil.getFeeInUserFiatCurrency
+            String makerFeeInXmrAndBsq = xmrFormatter.formatCoinWithCode(makerFeeInXmr) + "(= " + bsqFormatter.formatCoinWithCode(makerFeeInBsq) + ")";
+            tradeFeeInXmrWithBsq.set(makerFeeInXmrAndBsq);
             Optional<Volume> optionalBsqFeeInFiat = OfferUtil.getFeeInUserFiatCurrency(makerFeeInBsq,
                     false, preferences, priceFeedService, bsqFormatter);
             String bsqFeeWithFiatAmount = DisplayUtils.getFeeWithFiatAmount(makerFeeInBsq, optionalBsqFeeInFiat, bsqFormatter);
